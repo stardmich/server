@@ -328,7 +328,12 @@ class Router implements IRouter {
 	public function generate($name,
 							 $parameters = [],
 							 $absolute = false) {
-		$this->loadRoutes();
+		list($appName, $other) = explode('.', $name, 3);
+		// OCS routes are prefixed with "ocs."
+		if ($appName === 'ocs') {
+			$appName = $other;
+		}
+		$this->loadRoutes($appName);
 		try {
 			$referenceType = UrlGenerator::ABSOLUTE_URL;
 			if ($absolute === false) {
