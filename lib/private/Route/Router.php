@@ -363,7 +363,7 @@ class Router implements IRouter {
 	 * @param string $appName
 	 */
 	private function requireRouteFile($file, $appName) {
-		$this->setupRoutes(include_once $file, $appName);
+		$this->setupRoutes(include $file, $appName);
 	}
 
 
