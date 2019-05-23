@@ -1,7 +1,7 @@
 /**
- * @copyright Copyright (c) 2019 Julius Härtl <jus@bitgrid.net>
+ * @copyright Copyright (c) 2019 John Molakvoæ <skjnldsv@protonmail.com>
  *
- * @author Julius Härtl <jus@bitgrid.net>
+ * @author John Molakvoæ <skjnldsv@protonmail.com>
  *
  * @license GNU AGPL version 3 or any later version
  *
@@ -20,21 +20,20 @@
  *
  */
 
-import Vue from 'vue';
-import Vuex from 'vuex';
-import { Tooltip, PopoverMenu } from 'nextcloud-vue';
-import ClickOutside from 'vue-click-outside';
-
-Vue.prototype.t = t;
-Vue.component('PopoverMenu', PopoverMenu);
-Vue.directive('ClickOutside', ClickOutside);
-Tooltip.options.defaultHtml = false
-Vue.directive('Tooltip', Tooltip);
-Vue.use(Vuex);
-
-import View from './views/CollaborationView';
-
-export {
-	Vue,
-	View
-};
+export default {
+	data() {
+		return {
+			SHARE_TYPES: {
+				SHARE_TYPE_USER: OC.Share.SHARE_TYPE_USER, 
+				SHARE_TYPE_GROUP: OC.Share.SHARE_TYPE_GROUP, 
+				SHARE_TYPE_LINK: OC.Share.SHARE_TYPE_LINK, 
+				SHARE_TYPE_EMAIL: OC.Share.SHARE_TYPE_EMAIL, 
+				SHARE_TYPE_REMOTE: OC.Share.SHARE_TYPE_REMOTE, 
+				SHARE_TYPE_CIRCLE: OC.Share.SHARE_TYPE_CIRCLE, 
+				SHARE_TYPE_GUEST: OC.Share.SHARE_TYPE_GUEST, 
+				SHARE_TYPE_REMOTE_GROUP: OC.Share.SHARE_TYPE_REMOTE_GROUP,
+				SHARE_TYPE_ROOM: OC.Share.SHARE_TYPE_ROOM
+			}
+		}
+	}
+}
