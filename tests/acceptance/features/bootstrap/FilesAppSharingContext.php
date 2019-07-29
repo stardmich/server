@@ -249,7 +249,6 @@ class FilesAppSharingContext implements Context, ActorAwareInterface {
 		$this->actor->find(FileListContext::shareActionForFile(FilesAppContext::currentSectionMainView(), $fileName), 10)->click();
 
 		$this->actor->find(self::shareLinkAddNewButton(), 5)->click();
-
 	}
 
 	/**
