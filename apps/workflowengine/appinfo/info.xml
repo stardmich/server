@@ -36,6 +36,7 @@
 	</commands>
 
 	<settings>
+		<admin>OCA\WorkflowEngine\Settings\Admin</admin>
 		<admin-section>OCA\WorkflowEngine\Settings\Section</admin-section>
 	</settings>
 </info>
