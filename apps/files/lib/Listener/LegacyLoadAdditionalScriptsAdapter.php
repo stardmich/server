@@ -26,17 +26,16 @@ namespace OCA\Files\Listener;
 
 use OCA\Files\Event\LoadAdditionalScriptsEvent;
 use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventDispatcher;
 use OCP\EventDispatcher\IEventListener;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 class LegacyLoadAdditionalScriptsAdapter implements IEventListener {
 
-	/** @var EventDispatcherInterface */
-	private $legacyDispatcher;
+	/** @var IEventDispatcher */
+	private $dispatcher;
 
-	public function __construct(EventDispatcherInterface $legacyDispatcher) {
-		$this->legacyDispatcher = $legacyDispatcher;
+	public function __construct(IEventDispatcher $legacyDispatcher) {
+		$this->dispatcher = $legacyDispatcher;
 	}
 
 	public function handle(Event $event): void {
@@ -44,8 +43,8 @@ class LegacyLoadAdditionalScriptsAdapter implements IEventListener {
 			return;
 		}
 
-		$legacyEvent = new GenericEvent(null, ['hiddenFields' => []]);
-		$this->legacyDispatcher->dispatch('OCA\Files::loadAdditionalScripts', $legacyEvent);
+		$legacyEvent = new Event(null, ['hiddenFields' => []]);
+		$this->dispatcher->dispatch('OCA\Files::loadAdditionalScripts', $legacyEvent);
 
 		$hiddenFields = $legacyEvent->getArgument('hiddenFields');
 		foreach ($hiddenFields as $name => $value) {
