@@ -31,7 +31,7 @@ use OCA\Files\Collaboration\Resources\Listener;
 use OCA\Files\Collaboration\Resources\ResourceProvider;
 use OCA\Files\Controller\ApiController;
 use OCA\Files\Event\LoadAdditionalScriptsEvent;
-use OCA\Files\Listener\LegacyLoadAdditionalScripts;
+use OCA\Files\Listener\LegacyLoadAdditionalScriptsAdapter;
 use OCP\AppFramework\App;
 use \OCA\Files\Service\TagService;
 use OCP\Collaboration\Resources\IManager;
@@ -91,6 +91,6 @@ class Application extends App {
 
 		/** @var IEventDispatcher $dispatcher */
 		$dispatcher = $container->query(IEventDispatcher::class);
-		$dispatcher->addServiceListener(LoadAdditionalScriptsEvent::class, LegacyLoadAdditionalScripts::class);
+		$dispatcher->addServiceListener(LoadAdditionalScriptsEvent::class, LegacyLoadAdditionalScriptsAdapter::class);
 	}
 }

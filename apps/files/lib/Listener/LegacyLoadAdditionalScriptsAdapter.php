@@ -30,7 +30,7 @@ use OCP\EventDispatcher\IEventListener;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-class LegacyLoadAdditionalScripts implements IEventListener {
+class LegacyLoadAdditionalScriptsAdapter implements IEventListener {
 
 	/** @var EventDispatcherInterface */
 	private $legacyDispatcher;
