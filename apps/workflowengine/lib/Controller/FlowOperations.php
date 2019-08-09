@@ -47,7 +47,7 @@ class FlowOperations extends Controller {
 	 * @param string $class
 	 * @return JSONResponse
 	 */
-	public function getOperations($class) {
+	public function getOperations($class = null) {
 		$operations = $this->manager->getOperations($class);
 
 		foreach ($operations as &$operation) {

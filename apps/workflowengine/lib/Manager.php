@@ -199,16 +199,18 @@ class Manager implements IManager, IEntityAware {
 	 * @param string $class
 	 * @return array[]
 	 */
-	public function getOperations($class) {
-		if (isset($this->operations[$class])) {
+	public function getOperations($class = null) {
+		if ($class !== null && isset($this->operations[$class])) {
 			return $this->operations[$class];
 		}
 
 		$query = $this->connection->getQueryBuilder();
 
 		$query->select('*')
-			->from('flow_operations')
-			->where($query->expr()->eq('class', $query->createNamedParameter($class)));
+			->from('flow_operations');
+		if ($class !== null) {
+			$query->where($query->expr()->eq('class', $query->createNamedParameter($class)));
+		}
 		$result = $query->execute();
 
 		$this->operations[$class] = [];
