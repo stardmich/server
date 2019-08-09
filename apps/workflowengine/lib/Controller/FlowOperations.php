@@ -96,6 +96,22 @@ class FlowOperations extends Controller {
 	}
 
 	/**
+	 * @param string $class
+	 * @param string $name
+	 * @param array[] $checks
+	 * @param string $operation
+	 * @return JSONResponse The updated element
+	 */
+	public function testOperation($class, $name, $checks, $operation) {
+		try {
+			$this->manager->validateOperation($class, $name, $checks, $operation);
+			return new JSONResponse();
+		} catch (\UnexpectedValueException $e) {
+			return new JSONResponse($e->getMessage(), Http::STATUS_BAD_REQUEST);
+		}
+	}
+
+	/**
 	 * @PasswordConfirmationRequired
 	 *
 	 * @param int $id

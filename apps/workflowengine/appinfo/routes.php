@@ -23,6 +23,7 @@ return [
 	'routes' => [
 		['name' => 'flowOperations#getOperations', 'url' => '/operations', 'verb' => 'GET'],
 		['name' => 'flowOperations#addOperation', 'url' => '/operations', 'verb' => 'POST'],
+		['name' => 'flowOperations#testOperation', 'url' => '/operations/test', 'verb' => 'POST'],
 		['name' => 'flowOperations#updateOperation', 'url' => '/operations/{id}', 'verb' => 'PUT'],
 		['name' => 'flowOperations#deleteOperation', 'url' => '/operations/{id}', 'verb' => 'DELETE'],
 		['name' => 'requestTime#getTimezones', 'url' => '/timezones', 'verb' => 'GET'],
