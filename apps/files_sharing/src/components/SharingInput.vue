@@ -80,11 +80,21 @@ export default {
 			loading: false,
 			query: '',
 			recommendations: [],
+			ShareSearch: OCA.Sharing.ShareSearch.state,
 			suggestions: []
 		}
 	},
 
 	computed: {
+		/**
+		 * Implement ShareSearch
+		 * allows external appas to inject new
+		 * results into the autocomplete dropdown
+		 * Used for the guests app
+		 */
+		externalResults() {
+			return this.ShareSearch.results
+		},
 		inputPlaceholder() {
 			const allowRemoteSharing = this.config.isRemoteShareAllowed;
 			const allowMailSharing = this.config.isMailShareAllowed;
@@ -185,7 +195,7 @@ export default {
 				})
 			}
 
-			this.suggestions = exactSuggestions.concat(suggestions).concat(lookupEntry)
+			this.suggestions = exactSuggestions.concat(suggestions).concat(this.externalResults).concat(lookupEntry)
 
 			this.loading = false
 			console.info('suggestions', this.suggestions)
@@ -354,6 +364,11 @@ export default {
 		async addShare(value) {
 			if (value.lookup) {
 				return this.getSuggestions(this.query, true)
+			}
+
+			// handle externalResults from OCA.Sharing.ShareSearch
+			if (value.handler) {
+				return value.handler(this)
 			}
 
 			this.loading = true

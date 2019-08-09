@@ -22,6 +22,11 @@
 
 
 import SharingTab from './views/SharingTab'
+import ShareSearch from './services/ShareSearch'
+
+if (window.OCA && window.OCA.Sharing) {
+	Object.assign(window.OCA.Sharing, { ShareSearch: new ShareSearch() })
+}
 
 window.addEventListener('DOMContentLoaded', () => {
 	OCA.Files.Sidebar.registerTab(new OCA.Files.Sidebar.Tab('sharing', SharingTab))
