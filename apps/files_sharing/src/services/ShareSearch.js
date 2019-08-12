@@ -48,19 +48,20 @@ export default class ShareSearch {
 	 * Register a new result
 	 * 
 	 * @param {Object} result
-	 * @param {string} [result.user]
-	 * @param {string} result.displayName
-	 * @param {string} [result.desc]
-	 * @param {string} [result.icon]
-	 * @param {function} result.handler
+	 * @param {string} [result.user] entry user
+	 * @param {string} result.displayName entry first line
+	 * @param {string} [result.desc] entry second line 
+	 * @param {string} [result.icon] entry icon
+	 * @param {function} result.handler function to run on entry selection
+	 * @param {function} [result.condition] condition to add entry or not
 	 */
-	addNewResult({ user, displayName, desc, icon, handler }) {
-		if (displayName.trim() !== ''
-			&& typeof handler === 'function') {
-			this.#state.results.push({ user, displayName, desc, icon, handler })
+	addNewResult(result) {
+		if (result.displayName.trim() !== ''
+			&& typeof result.handler === 'function') {
+			this.#state.results.push(result)
 			return true
 		}
-		console.error(`Invalid search result provided`, { user, displayName, desc, icon, handler });
+		console.error(`Invalid search result provided`, result);
 		return false
 	}
 }

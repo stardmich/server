@@ -29,5 +29,7 @@ if (window.OCA && window.OCA.Sharing) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-	OCA.Files.Sidebar.registerTab(new OCA.Files.Sidebar.Tab('sharing', SharingTab))
+	if (OCA.Files && OCA.Files.Sidebar) {
+		OCA.Files.Sidebar.registerTab(new OCA.Files.Sidebar.Tab('sharing', SharingTab))
+	}
 })

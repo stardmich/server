@@ -195,7 +195,10 @@ export default {
 				})
 			}
 
-			this.suggestions = exactSuggestions.concat(suggestions).concat(this.externalResults).concat(lookupEntry)
+			// if there is a condition specified, filter it
+			const externalResults = this.externalResults.filter(result => !result.condition || result.condition(this) )
+
+			this.suggestions = exactSuggestions.concat(suggestions).concat(externalResults).concat(lookupEntry)
 
 			this.loading = false
 			console.info('suggestions', this.suggestions)
@@ -368,7 +371,9 @@ export default {
 
 			// handle externalResults from OCA.Sharing.ShareSearch
 			if (value.handler) {
-				return value.handler(this)
+				const share = await value.handler(this)
+				this.$emit('add:share', new Share(share))
+				return true
 			}
 
 			this.loading = true
