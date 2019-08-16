@@ -304,13 +304,13 @@ class ShareAPIController extends OCSController {
 			throw new OCSNotFoundException($this->l->t('Wrong share ID, share doesn\'t exist'));
 		}
 
-		if ($this->canAccessShare($share)) {
-			try {
+		try {
+			if ($this->canAccessShare($share)) {
 				$share = $this->formatShare($share);
 				return new DataResponse([$share]);
-			} catch (NotFoundException $e) {
-				//Fall trough
 			}
+		} catch (NotFoundException $e) {
+			// Fall trough
 		}
 
 		throw new OCSNotFoundException($this->l->t('Wrong share ID, share doesn\'t exist'));
@@ -986,6 +986,12 @@ class ShareAPIController extends OCSController {
 	}
 
 	/**
+	 * Does the user have read permission on the share
+	 *
+	 * @param \OCP\Share\IShare $share the share to check
+	 * @param boolean $checkGroups check groups as well?
+	 * @return boolean
+	 *
 	 * @suppress PhanUndeclaredClassMethod
 	 */
 	protected function canAccessShare(\OCP\Share\IShare $share, bool $checkGroups = true): bool {
@@ -1005,6 +1011,11 @@ class ShareAPIController extends OCSController {
 		if ($share->getShareType() === Share::SHARE_TYPE_USER &&
 			$share->getSharedWith() === $this->currentUser
 		) {
+			return true;
+		}
+
+		// Have reshare rights ?
+		if ($this->shareProviderResharingRights($this->currentUser, $share, $share->getNode())) {
 			return true;
 		}
 
