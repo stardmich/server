@@ -37,6 +37,7 @@ use OCA\Files_Sharing\ShareBackend\Folder;
 
 $application = new \OCA\Files_Sharing\AppInfo\Application();
 $application->registerMountProviders();
+$application->register();
 
 $eventDispatcher = \OC::$server->getEventDispatcher();
 $eventDispatcher->addListener(

@@ -32,6 +32,7 @@ namespace OCA\Files_Sharing\AppInfo;
 use OCA\Files_Sharing\Middleware\OCSShareAPIMiddleware;
 use OCA\Files_Sharing\Middleware\ShareInfoMiddleware;
 use OCA\Files_Sharing\MountProvider;
+use OCA\Files_Sharing\Notification\Notifier;
 use OCP\AppFramework\App;
 use OC\AppFramework\Utility\SimpleContainer;
 use OCA\Files_Sharing\Controller\ExternalSharesController;
@@ -179,5 +180,10 @@ class Application extends App {
 		$mountProviderCollection = $server->getMountProviderCollection();
 		$mountProviderCollection->registerProvider($this->getContainer()->query('MountProvider'));
 		$mountProviderCollection->registerProvider($this->getContainer()->query('ExternalMountProvider'));
+	}
+
+	public function register(): void {
+		$manager = $this->getContainer()->getServer()->getNotificationManager();
+		$manager->registerNotifierService(Notifier::class);
 	}
 }

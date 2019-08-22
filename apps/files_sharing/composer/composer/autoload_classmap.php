@@ -50,6 +50,7 @@ return array(
     'OCA\\Files_Sharing\\Migration\\OwncloudGuestShareType' => $baseDir . '/../lib/Migration/OwncloudGuestShareType.php',
     'OCA\\Files_Sharing\\Migration\\SetPasswordColumn' => $baseDir . '/../lib/Migration/SetPasswordColumn.php',
     'OCA\\Files_Sharing\\MountProvider' => $baseDir . '/../lib/MountProvider.php',
+    'OCA\\Files_Sharing\\Notification\\Notifier' => $baseDir . '/../lib/Notification/Notifier.php',
     'OCA\\Files_Sharing\\Scanner' => $baseDir . '/../lib/Scanner.php',
     'OCA\\Files_Sharing\\ShareBackend\\File' => $baseDir . '/../lib/ShareBackend/File.php',
     'OCA\\Files_Sharing\\ShareBackend\\Folder' => $baseDir . '/../lib/ShareBackend/Folder.php',
